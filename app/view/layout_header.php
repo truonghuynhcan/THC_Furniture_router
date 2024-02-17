@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg bg-light py-2 fixed-top">
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand fw-bold" href="<?=APPURL?>">THC <span class="text-primary">Furniture</span></a>
+                <a class="navbar-brand fw-bold" href="<?= APPURL ?>">THC <span class="text-primary">Furniture</span></a>
                 <!-- Toggle Btn -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav nav-underline justify-content-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?=APPURL?>">Trang chủ</a>
+                                <a class="nav-link active" aria-current="page" href="<?= APPURL ?>">Trang chủ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html">Giới thiệu</a>
@@ -66,10 +66,33 @@
                                     aria-expanded="false">
                                     <i class="fa-regular fa-user"></i>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="<?=APPURL?>user/login">Đăng nhập</a></li>
-                                    <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-                                </ul>
+                                <?php if (!isset($_SESSION['user'])): ?>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/login">Đăng nhập</a></li>
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/signup">Đăng ký</a></li>
+                                    </ul>
+                                <?php elseif($_SESSION['user']['Quyen']===1): ?>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>ad_dashboard/index">Admin</a></li>
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/info">Tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/login">Quản lý đơn hàng</a>
+                                        </li>
+                                        <li class="border-top mt-2 py-1 opacity-75"><a class="dropdown-item"
+                                                href="<?= APPURL ?>user/logout">Đăng xuất</a></li>
+                                    </ul>
+                                <?php else: ?>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/info">Tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/login">Quản lý đơn hàng</a>
+                                        </li>
+                                        <li class="border-top mt-2 py-1 opacity-75"><a class="dropdown-item"
+                                                href="<?= APPURL ?>user/logout">Đăng xuất</a></li>
+                                    </ul>
+                                <?php endif; ?>
+                                <!-- <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="<?= APPURL ?>user/login">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="<?= APPURL ?>user/signup">Đăng ký</a></li>
+                                </ul> -->
                             </div>
                             <a class="text-decoration-none text-black px-3 py-1 bg-primary rounded-4 text-white"
                                 href="cart.html">

@@ -1,5 +1,5 @@
 <!-- Breadcrumb star-->
-<section class="position-relative mb-3" style="">
+<section class="position-relative mb-3">
     <img src="<?= APPURL ?>upload/banners/breadcrumb.webp" class="w-100" alt="">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb"
         class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">

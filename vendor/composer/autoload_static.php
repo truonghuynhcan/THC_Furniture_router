@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInitab6b28146d8f3958fce6a96b3202188f
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -14,6 +18,10 @@ class ComposerStaticInitab6b28146d8f3958fce6a96b3202188f
     );
 
     public static $prefixDirsPsr4 = array (
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -21,13 +29,6 @@ class ComposerStaticInitab6b28146d8f3958fce6a96b3202188f
     );
 
     public static $classMap = array (
-        'App\\controller\\CoreController' => __DIR__ . '/../..' . '/app/controller/CoreController.php',
-        'App\\controller\\PageController' => __DIR__ . '/../..' . '/app/controller/PageController.php',
-        'App\\controller\\ProductController' => __DIR__ . '/../..' . '/app/controller/ProductController.php',
-        'App\\model\\database' => __DIR__ . '/../..' . '/app/model/database.php',
-        'App\\model\\products' => __DIR__ . '/../..' . '/app/model/products.php',
-        'App\\model\\sanpham' => __DIR__ . '/../..' . '/app/model/sanpham.php',
-        'App\\model\\xl_data' => __DIR__ . '/../..' . '/app/model/xl_data.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

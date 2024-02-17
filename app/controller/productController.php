@@ -12,7 +12,4 @@ class ProductController extends CoreController
         $data['pro'] = $products->getProductById($idsp)[0];
         $this->loadViewSite('pro_detail', $data);
     }
-    public function detail1($id) {
-        echo "Product Detail ID: " . $id;
-    }
 }
