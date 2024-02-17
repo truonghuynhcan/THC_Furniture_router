@@ -1,6 +1,18 @@
 <?php
 namespace App\controller;
 
-class productController extends CoreController{
+use App\model\ProductModel;
 
+class ProductController extends CoreController
+{
+    public function detail()
+    {
+        $idsp = $_GET['id'];
+        $products = new ProductModel;
+        $data['pro'] = $products->getProductById($idsp)[0];
+        $this->loadViewSite('pro_detail', $data);
+    }
+    public function detail1($id) {
+        echo "Product Detail ID: " . $id;
+    }
 }

@@ -43,36 +43,7 @@
     </div>
 </section>
 <!-- Banner end-->
-<!-- demo start -->
-<?php
-use App\model\sanpham;
 
-// $records = 5;
-// $pages = 0;
-// $page = 1;
-// if (isset($_REQUEST['txtPage'])) {
-//     $page = $_REQUEST['txtPage'];
-// }
-// $sps = new App\model\sanpham();
-// $listitems = $sps->getdata();
-// $mode = count($listitems) % $records;
-// if ($mode > 0) {
-//     $pages = (count($listitems) - $mode) / $records + 1;
-// } else {
-//     $pages = count($listitems) / $records;
-// }
-// if ($page > $pages) {
-//     $page = 1;
-// }
-// $limits = $records * $page;
-// $st = $limits - $records;
-// $listitems = $sps->getdata_limit($st, $records);
-$products = new App\model\products;
-$listItems = $products->getProducts();
-
-?>
-
-<!-- demo end -->
 <!-- Category start -->
 <section class="cate-list bg-light py-2 d-none">
     <div class="container text-center">
@@ -137,7 +108,7 @@ $listItems = $products->getProducts();
                         </div>
                         <img src="<?= APPURL ?>public/upload/products/<?= $item['Anh'] ?>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href="<?= APPURL ?>product/detail/<?= $item['Id'] ?>"
+                            <a href="/product/detail?id=<?= $item['Id'] ?>"
                                 class="card-title h5 text-decoration-none overflow-auto" style="height: 3.5em;">
                                 <?= $item['TenSanPham'] ?>
                             </a>
@@ -148,7 +119,7 @@ $listItems = $products->getProducts();
                                     class="text-secondary text-decoration-line-through fw-normal <?= $item['GiamGia'] > 0 ? '' : 'd-none' ?>">
                                     <?= number_format($item['DonGia'], 0, ',', '.') ?> ₫
                                 </span></p>
-                            <a href="<?= APPURL ?>product/addToCart/<?= $item['Id'] ?>"
+                            <a href="<?= APPURL ?>product/addToCart?id=<?= $item['Id'] ?>"
                                 class="btn btn-primary container-fluid">Thêm vào giỏ</a>
                         </div>
                     </div>

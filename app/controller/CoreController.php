@@ -10,8 +10,12 @@ class CoreController
         // $data['dsSP']
         extract($data);
         // $dsSP
-        include_once '../app/Views/layout_header.php';
-        include_once '../app/Views/' . $viewName . '.php';
-        include_once '../app/Views/layout_footer.php';
+        // Sử dụng hằng số __DIR__ để xác định đường dẫn tuyệt đối tới thư mục hiện tại
+        $viewsPath = __DIR__ . '/../../app/view/';
+        
+        // Bao gồm các tệp từ đường dẫn tuyệt đối
+        include_once $viewsPath . 'layout_header.php';
+        include_once $viewsPath . $viewName . '.php';
+        include_once $viewsPath . 'layout_footer.php';
     }
 }

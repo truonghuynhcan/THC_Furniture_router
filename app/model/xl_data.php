@@ -1,5 +1,4 @@
 <?php
-
  namespace App\model;
 
  class xl_data extends database{
