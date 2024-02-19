@@ -119,7 +119,7 @@
                                     class="text-secondary text-decoration-line-through fw-normal <?= $item['GiamGia'] > 0 ? '' : 'd-none' ?>">
                                     <?= number_format($item['DonGia'], 0, ',', '.') ?> ₫
                                 </span></p>
-                            <a href="<?= APPURL ?>product/addToCart?id=<?= $item['Id'] ?>"
+                            <a href="<?= APPURL ?>cart/add?id=<?= $item['Id'] ?>"
                                 class="btn btn-primary container-fluid">Thêm vào giỏ</a>
                         </div>
                     </div>

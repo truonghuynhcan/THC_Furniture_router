@@ -1,6 +1,6 @@
 <!-- Breadcrumb star-->
 <section class="position-relative mb-3">
-    <img src="<?= APPURL ?>upload/banners/breadcrumb.webp" class="w-100" alt="">
+    <img src="<?= APPURL ?>public/upload/banners/breadcrumb.webp" class="w-100" alt="">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb"
         class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
         <h1>Giỏ hàng</h1>
@@ -45,10 +45,10 @@
                                     <?= number_format($sp['DonGia'], 0, ',', '.') ?> ₫
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= APPURL ?>product/cartItem/<?= $sp['MaDH'] ?>/<?= $sp['Id'] ?>/decrease"
+                                    <a href="<?= APPURL ?>cart/cartItem?MaDH=<?= $sp['MaDH'] ?>&&MaSP=<?= $sp['Id'] ?>&&type=decrease"
                                         class="btn btn-sm <?= ($sp['SoLuong'] == 1) ? 'disabled btn-outline-secondary' : 'btn-outline-primary' ?>">-</a>
                                     <?= $sp['SoLuong'] ?>
-                                    <a href="<?= APPURL ?>product/cartItem/<?= $sp['MaDH'] ?>/<?= $sp['Id'] ?>/increase"
+                                    <a href="<?= APPURL ?>cart/cartItem?MaDH=<?= $sp['MaDH'] ?>&&MaSP=<?= $sp['Id'] ?>&&type=increase"
                                         class="btn btn-sm <?= ($sp['SoLuong'] == $sp['TonKho']) ? 'disabled btn-outline-secondary' : 'btn-outline-primary ' ?>">+</a>
 
                                 </td>
@@ -97,7 +97,7 @@
                                 <button type="submit" class="btn border-1">Áp dụng</button>
                             </form>
                         </div>
-                        <a href="<?= APPURL ?>page/checkout" class="card-link btn btn-primary container-fluid">Thanh
+                        <a href="<?= APPURL ?>cart/checkout" class="card-link btn btn-primary container-fluid">Thanh
                             toán</a>
                     </div>
                 </div>

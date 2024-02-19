@@ -6,6 +6,29 @@ use PHPMailer\PHPMailer\Exception;
 
 class UserModel
 {
+    // lấy thông tin đơn hàng đã đặt từ id đơn hàng
+    public function getOrderById($IdDh){
+        $xl = new xl_data();
+        $sql = 'SELECT 
+                dh.* ,
+                tk.HoVaTen,
+                tk.SDT AS SDTTK, 
+                sp.TenSanPham, 
+                ctdh.SoLuong, 
+                ctdh.DonGia
+            FROM 
+                donhang dh
+            INNER JOIN 
+                taikhoan tk ON dh.MaTK = tk.Id
+            INNER JOIN 
+                chitietdonhang ctdh ON dh.Id = ctdh.MaDH
+            INNER JOIN 
+                sanpham sp ON ctdh.MaSP = sp.Id
+            WHERE 
+                dh.Id = '.$IdDh;
+        $result = $xl->readitem($sql);
+        return $result;
+    }
 
     public function rePass($email)
     {
@@ -20,7 +43,7 @@ class UserModel
 
             // Cập nhật mật khẩu mới vào cơ sở dữ liệu
             $xl = new xl_data();
-            $sql = "UPDATE taikhoan SET MatKhau = ".$hashedPassword." WHERE taikhoan.Email = ".$email;
+            $sql = 'UPDATE taikhoan SET MatKhau = "'.$hashedPassword.'" WHERE taikhoan.Email = "'.$email.'"';
             $result = $xl->execute_item($sql);
             return true;
         } else {
@@ -65,7 +88,7 @@ class UserModel
     public function checkEmail($email)
     {
         $xl = new xl_data();
-        $sql = "SELECT * FROM taikhoan WHERE Email=" . $email;
+        $sql = 'SELECT * FROM taikhoan WHERE Email="' . $email.'"';
         $result = $xl->readitem($sql);
         return $result;
     }
@@ -73,7 +96,7 @@ class UserModel
     {
         $hashedPassword = md5($pass);
         $xl = new xl_data();
-        $sql = "INSERT INTO taikhoan (Id, HoVaTen, SDT, DiaChi, Email, MatKhau, Quyen) VALUES (null," . $fullname . "," . $sdt . "," . $address . "," . $email . "," . $hashedPassword . ",0)";
+        $sql = 'INSERT INTO taikhoan (Id, HoVaTen, SDT, DiaChi, Email, MatKhau, Quyen) VALUES (null,"' . $fullname . '","' . $sdt . '","' . $address . '","' . $email . '","' . $hashedPassword . '",0)';
         $result = $xl->execute_item($sql);
         return $result;
     }

@@ -95,7 +95,7 @@
                                 </ul> -->
                             </div>
                             <a class="text-decoration-none text-black px-3 py-1 bg-primary rounded-4 text-white"
-                                href="cart.html">
+                                href="<?=APPURL?>cart">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </a>
                         </div>

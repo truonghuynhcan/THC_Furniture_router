@@ -5,10 +5,31 @@ use App\model\UserModel;
 
 class UserController extends CoreController
 {
+    public function showInfo(){
+        $idTK = $_SESSION['user']['Id'];
+        
+    }
+    public function showOrder(){
+        $idDH=$_GET['idDh'];
+        $oder = new UserModel(); //load model
+        $data['order'] = $oder->getOrderById($idDH); //lấy danh sách
+
+        $this->loadViewSite('user_order',$data);
+    }
+    // cart
+    public function addToCart()
+    {
+        $idsp = $_GET['id']; // lấy id so
+        
+        // $products = new UserModel;
+        // $data['pro'] = $products->getProductById($idsp)[0];
+        // $this->loadViewSite('pro_detail', $data);
+    }
+
     public function logout()
     {
         unset($_SESSION['user']);
-        header("Location: " . APPURL . "public/login");
+        header("Location: " . APPURL . "user/login");
         exit();
     }
     public function login(){
@@ -46,13 +67,4 @@ class UserController extends CoreController
     public function signup(){
         $this->loadViewSite('user_signup');
     }
-    public function addToCart()
-    {
-        $idsp = $_GET['id']; // lấy id so
-        
-        // $products = new UserModel;
-        // $data['pro'] = $products->getProductById($idsp)[0];
-        // $this->loadViewSite('pro_detail', $data);
-    }
-
 }
