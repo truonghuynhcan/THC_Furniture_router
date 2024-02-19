@@ -6,7 +6,7 @@
     }
 </style>
 <div class="checkout container">
-    <form class="row" action="<?=APPURL?>cart/checkout" method="post">
+    <form class="row" action="<?= APPURL ?>cart/checkout" method="post">
         <div class="col-12 col-md-8 py-3">
             <header class="text-center mb-3">
                 <a href="#" class="text-body text-decoration-none h2">THC <span
@@ -16,21 +16,26 @@
                 <div class="col-12 col-lg-6 mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h2 class="h4">Thông tin nhận hàng</h2>
-                        <a href="<?=APPURL?>user/login" class="text-decoration-none text-info <?=(isset($_SESSION['user'])?'d-none':'')?>">
+                        <a href="<?= APPURL ?>user/login"
+                            class="text-decoration-none text-info <?= (isset($_SESSION['user']) ? 'd-none' : '') ?>">
                             <i class="fa-solid fa-user"></i>
                             Đăng nhập
                         </a>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Nguyễn Văn An"  value="<?=(isset($_SESSION['user']['HoVaTen'])?$_SESSION['user']['HoVaTen']:'')?>">
+                        <input type="text" name="fullname" class="form-control" id="fullname"
+                            placeholder="Nguyễn Văn An"
+                            value="<?= (isset($_SESSION['user']['HoVaTen']) ? $_SESSION['user']['HoVaTen'] : '') ?>">
                         <label for="fullname">Họ và tên</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="tel" name="sdt" class="form-control" id="sdt" placeholder="0987654321"  value="<?=(isset($_SESSION['user']['SDT'])?$_SESSION['user']['SDT']:'')?>">
+                        <input type="tel" name="sdt" class="form-control" id="sdt" placeholder="0987654321"
+                            value="<?= (isset($_SESSION['user']['SDT']) ? $_SESSION['user']['SDT'] : '') ?>">
                         <label for="sdt">Số điện thoại</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" name="address" class="form-control" id="address" placeholder="Gò vấp, TP HCM"  value="<?=(isset($_SESSION['user']['DiaChi'])?$_SESSION['user']['DiaChi']:'')?>">
+                        <input type="text" name="address" class="form-control" id="address" placeholder="Gò vấp, TP HCM"
+                            value="<?= (isset($_SESSION['user']['DiaChi']) ? $_SESSION['user']['DiaChi'] : '') ?>">
                         <label for="address">Địa chỉ</label>
                     </div>
                     <div class="form-floating">
@@ -87,23 +92,26 @@
                             ?>
                             <tr scope="row" style="height: 70px;">
                                 <td class="rounded" style="width: 1px;"><img
-                                        src="<?= APPURL ?>public/upload/products/<?= $sp['AnhSP'] ?>" height="60" alt=""></td>
+                                        src="<?= APPURL ?>public/upload/products/<?= $sp['AnhSP'] ?>" height="60" alt="">
+                                </td>
                                 <td>
                                     <span class="d-inline-block text-truncate" style="max-width: 150px;">
                                         <?= $sp['TenSP'] ?>
                                     </span>
-                                    <br>(<?= $sp['SoLuong'] ?> sản phẩm)
+                                    <br>(
+                                    <?= $sp['SoLuong'] ?> sản phẩm)
                                 </td>
                                 <td class="text-end opacity-50">
-                                    <?= number_format(($sp['DonGia']*(1-$sp['GiamGiaSP']/100)) * $sp['SoLuong'], 0, ',', '.') ?> ₫
+                                    <?= number_format(($sp['DonGia'] * (1 - $sp['GiamGiaSP'] / 100)) * $sp['SoLuong'], 0, ',', '.') ?>
+                                    ₫
                                 </td>
                             </tr>
                             <?php
                             $countPro += $sp['SoLuong'];
-                            $totalPro += $sp['SoLuong'] * ($sp['DonGia']*(1-$sp['GiamGiaSP']/100));
+                            $totalPro += $sp['SoLuong'] * ($sp['DonGia'] * (1 - $sp['GiamGiaSP'] / 100));
                         endforeach;
                         ?>
-                            <!-- <tr style="height: 70px;">
+                        <!-- <tr style="height: 70px;">
                                 <td class="rounded" style="width: 1px;"><img
                                         src="../public/upload/products/vn111342077qukwlf0rhzptr4i2ef.webp" height="60"
                                         alt=""></td>
@@ -124,32 +132,42 @@
                 <div class="border-bottom">
                     <div class="d-flex justify-content-between">
                         <p class="card-text">Tạm tính</p>
-                        <p class="card-text"> <?= number_format($totalPro, 0, ',', '.') ?> ₫</p>
+                        <p class="card-text">
+                            <?= number_format($totalPro, 0, ',', '.') ?> ₫
+                        </p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="card-text">Phí vận chuyển</p>
-                        <p class="card-text"> <?= number_format($shippingFee, 0, ',', '.') ?> ₫</p>
+                        <input type="hidden" name="shippingFee" value="<?= $shippingFee ?>">
+                        <p class="card-text">
+                            <?= number_format($shippingFee, 0, ',', '.') ?> ₫
+                        </p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="card-text">Giảm giá</p>
-                        <p class="card-text"> <?= number_format($shippingFee, 0, ',', '.') ?> ₫</p>
+                        <p class="card-text">
+                            <?= number_format($shippingFee, 0, ',', '.') ?> ₫
+                        </p>
                     </div>
                 </div>
             </section>
             <section class="mx-3 pt-3">
                 <div class="d-flex justify-content-between h4 opacity-75">
                     <p class="card-text">Tổng cộng</p>
-                    <input type="hidden" name="countPro" value="<?=$countPro?>">
-                    <input type="hidden" name="totalBill" value="<?=$totalPro+$shippingFee?>">
-                    <p class="card-text text-info fw-light"><?= number_format($totalPro-$shippingFee, 0, ',', '.') ?> ₫</p>
+                    <input type="hidden" name="countPro" value="<?= $countPro ?>">
+                    <input type="hidden" name="totalBill" value="<?= $totalPro + $shippingFee ?>">
+                    <p class="card-text text-info fw-light">
+                        <?= number_format($totalPro - $shippingFee, 0, ',', '.') ?> ₫
+                    </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center gap-3">
-                    <a href="<?=APPURL?>products/cart" class="card-text text-info text-decoration-none">
+                    <a href="<?= APPURL ?>cart" class="card-text text-info text-decoration-none">
                         <i class="fa-solid fa-chevron-left"></i>
                         Quay về giỏ hàng
                     </a>
-                    <input type="hidden" name="madh" value="<?=$cart[0]['MaDH']?>">
-                    <button type="submit" name="order" class="card-text btn btn-primary px-4 py-2 text-body text-uppercase fw-medium">Đặt
+                    <input type="hidden" name="madh" value="<?= $cart[0]['MaDH'] ?>">
+                    <button type="submit" name="order"
+                        class="card-text btn btn-primary px-4 py-2 text-body text-uppercase fw-medium">Đặt
                         hàng</button>
                 </div>
             </section>

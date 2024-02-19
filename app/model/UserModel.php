@@ -6,8 +6,16 @@ use PHPMailer\PHPMailer\Exception;
 
 class UserModel
 {
+    public function deleteOrderById($idDH){
+        $xl = new xl_data();
+        $sql = "UPDATE donhang SET `TrangThai`='huy-don' WHERE Id = ".$idDH;
+        $result = $xl->execute_item($sql);
+        return $result;
+    }
+
+
     // lấy thông tin đơn hàng đã đặt từ id đơn hàng
-    public function getOrderById($IdDh){
+    public function getOrderById($IdDh, $IdTK){
         $xl = new xl_data();
         $sql = 'SELECT 
                 dh.* ,
@@ -25,7 +33,7 @@ class UserModel
             INNER JOIN 
                 sanpham sp ON ctdh.MaSP = sp.Id
             WHERE 
-                dh.Id = '.$IdDh;
+                dh.Id = '.$IdDh.' AND dh.MaTK = '.$IdTK;
         $result = $xl->readitem($sql);
         return $result;
     }

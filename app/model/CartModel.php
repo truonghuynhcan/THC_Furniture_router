@@ -1,29 +1,46 @@
 <?php
 namespace App\model;
+
 use App\model\xl_data;
+
 class CartModel
 {
-    public function orderById($SoLuongSP, $TongTien, $NguoiNhan, $SDT, $DiaChiGiaoHang, $MaTK)
+    public function orderById($SoLuongSP, $TongTien, $PhiVanChuyen, $NguoiNhan, $SDT, $DiaChiGiaoHang, $MaDH)
     {
-        return $this->db->pdo_execute("UPDATE `donhang` 
+        $xl = new xl_data();
+        $sql = "UPDATE `donhang` 
         SET 
-            SoLuongSP = ?, 
-            TongTien = ?, 
+            SoLuongSP = ".$SoLuongSP.", 
+            TongTien = ".$TongTien.", 
+            PhiVanChuyen = ".$PhiVanChuyen.", 
             TrangThai = 'cho-xac-nhan', 
-            NguoiNhan = ?,
-            SDT = ?,
-            DiaChiGiaoHang = ?
-        WHERE MaTK =?;", $SoLuongSP, $TongTien, $NguoiNhan, $SDT, $DiaChiGiaoHang, $MaTK);
+            NguoiNhan = '".$NguoiNhan."',
+            SDT = '".$SDT."',
+            DiaChiGiaoHang = '".$DiaChiGiaoHang."'
+        WHERE Id =".$MaDH;
+
+        $result = $xl->execute_item($sql);
+        return $result;
     }
-    
-    
+
+    public function remoteProduct($IdSP, $IdUser)
+    {
+        $xl = new xl_data();
+        $sql = "DELETE FROM chitietdonhang 
+        WHERE MaDH IN (SELECT Id FROM donhang WHERE MaTK = " . $IdUser . ") AND MaSP = " . $IdSP;
+
+        $result = $xl->execute_item($sql);
+        return $result;
+    }
+
+
     // tăng giảm số lượng sp START
     public function increaseItem($MaDH, $MaSP)
     {
         $xl = new xl_data();
         $sql = "UPDATE chitietdonhang 
             SET SoLuong = SoLuong+1
-            WHERE  MaDH =".$MaDH." AND MaSP =".$MaSP;
+            WHERE  MaDH =" . $MaDH . " AND MaSP =" . $MaSP;
 
         $result = $xl->execute_item($sql);
         return $result;
@@ -33,7 +50,7 @@ class CartModel
         $xl = new xl_data();
         $sql = "UPDATE chitietdonhang 
             SET SoLuong = SoLuong-1
-            WHERE  MaDH =".$MaDH." AND MaSP =".$MaSP;
+            WHERE  MaDH =" . $MaDH . " AND MaSP =" . $MaSP;
 
         $result = $xl->execute_item($sql);
         return $result;
@@ -42,19 +59,19 @@ class CartModel
 
 
     // sử lý voucher
-    public function addVoucher($MaDH, $voucher)
-    {
-        return $this->db->pdo_execute("UPDATE donhang SET MaGG =? WHERE Id =?", $voucher, $MaDH);
-    }
-    public function isValidVoucher($voucher)
-    {
-        return $this->db->pdo_query_one("SELECT * FROM magiamgia WHERE MaGG =?", $voucher);
-    }
+    // public function addVoucher($MaDH, $voucher)
+    // {
+    //     return $this->db->pdo_execute("UPDATE donhang SET MaGG =? WHERE Id =?", $voucher, $MaDH);
+    // }
+    // public function isValidVoucher($voucher)
+    // {
+    //     return $this->db->pdo_query_one("SELECT * FROM magiamgia WHERE MaGG =?", $voucher);
+    // }
 
     public function getCartbyUser($MaTK)
     { // kiểm tra lại
         $xl = new xl_data();
-        $sql = "SELECT * FROM donhang WHERE MaTK =".$MaTK." AND TrangThai='gio-hang'";
+        $sql = "SELECT * FROM donhang WHERE MaTK =" . $MaTK . " AND TrangThai='gio-hang'";
         $result = $xl->readitem($sql);
         return $result;
     }
@@ -62,21 +79,21 @@ class CartModel
     public function addCart($MaTK)
     {
         $xl = new xl_data();
-        $sql = "INSERT INTO donhang (`MaTK`) VALUES(".$MaTK.")";
+        $sql = "INSERT INTO donhang (`MaTK`) VALUES(" . $MaTK . ")";
         $result = $xl->execute_item($sql);
         return $result;
     }
 
-    public function addProduct($MaDH, $MaSP)
+    public function addProduct($MaDH, $sp)
     {
-        $kq = $this->hasCart($MaDH, $MaSP);
+        $kq = $this->hasCart($MaDH, $sp['Id']);
         // nếu chưa có sp trong cart
         if ($kq) {
             // có sp trong cart -> #tăng số lượng sp
-        $sql = "UPDATE chitietdonhang SET SoLuong = SoLuong+1 WHERE MaDH =".$MaDH." AND MaSP =".$MaSP;
+            $sql = "UPDATE chitietdonhang SET SoLuong = SoLuong+1 WHERE MaDH =" . $MaDH . " AND MaSP =" . $sp['Id'];
         } else {
             // KO sp trong cart -> #thêm sp vào
-        $sql = "INSERT INTO chitietdonhang (`MaDH`, `MaSP`) VALUES(".$MaDH.",".$MaSP.")";
+            $sql = "INSERT INTO chitietdonhang (`MaDH`, `MaSP`, `DonGia`) VALUES(" . $MaDH . "," .$sp['Id'] . "," . $sp['DonGia']*(1-$sp['GiamGia']/100) . ")";
         }
 
         $xl = new xl_data();
@@ -85,19 +102,22 @@ class CartModel
     }
 
     // kiểm tra sp có trong cart chưa
-    public function hasCart($MaDH, $MaSP)
+    public function getProductById($IdPro)
     {
         $xl = new xl_data();
-        $sql = "SELECT * FROM chitietdonhang WHERE MaDH =".$MaDH." AND MaSP =".$MaSP;
+        $sql = "SELECT Id, DonGia, GiamGia FROM sanpham WHERE Id =" . $IdPro;
         $result = $xl->readitem($sql);
         return $result;
     }
-    public function remoteProduct($IdSP, $IdUser)
+    // kiểm tra sp có trong cart chưa
+    public function hasCart($MaDH, $MaSP)
     {
-        return $this->db->pdo_execute("DELETE FROM chitietdonhang 
-        WHERE MaDH IN (SELECT Id FROM donhang WHERE MaTK = ?) 
-        AND MaSP = ?", $IdUser, $IdSP);
+        $xl = new xl_data();
+        $sql = "SELECT * FROM chitietdonhang WHERE MaDH =" . $MaDH . " AND MaSP =" . $MaSP;
+        $result = $xl->readitem($sql);
+        return $result;
     }
+
     public function getProductInCart($IdUser)
     {
         $xl = new xl_data();

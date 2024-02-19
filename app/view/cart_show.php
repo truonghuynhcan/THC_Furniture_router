@@ -55,7 +55,7 @@
                                 <td class="text-primary text-end">
                                     <?= number_format($sp['SoLuong'] * $sp['DonGia'], 0, ',', '.') ?> ₫
                                 </td>
-                                <td class="text-center"><a href="<?= APPURL ?>product/remoteProduct/<?= $sp['Id'] ?>"
+                                <td class="text-center"><a href="<?= APPURL ?>cart/remoteProduct?id=<?= $sp['Id'] ?>"
                                         class="btn btn-primary">Xóa</a></td>
                             </tr>
                             <?php

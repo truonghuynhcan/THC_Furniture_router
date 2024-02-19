@@ -12,8 +12,7 @@
                     <span class="ms-2 text-info fw-bold">(
                         <?= $order[0]['TrangThai'] ?>)
                     </span>
-                    <p class="mb-1">02/01/2024 - 22:51
-                        <?= $order[0]['NgayDat'] ?>
+                    <p class="mb-1"><?= $order[0]['NgayDat'] ?>
                     </p>
                 </div>
             </section>
@@ -85,8 +84,8 @@
                             <tr>
                                 <th scope="row" class="fw-medium"><?=$sp['TenSanPham']?></th>
                                 <td class="text-center"><?=$sp['SoLuong']?></td>
-                                <td class="text-end"><?=$sp['DonGia']?> ₫</td>
-                                <td class="text-end"><?=($sp['DonGia']*$sp['SoLuong'])?> ₫</td>
+                                <td class="text-end"><?=number_format($sp['DonGia'],0,',','.')?> ₫</td>
+                                <td class="text-end"><?=number_format($sp['DonGia']*$sp['SoLuong'],0,',','.')?> ₫</td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -104,7 +103,7 @@
                 <div class="container">
                     <div class="d-flex justify-content-between">
                         <span class="text-black-50 fw-bold">Tiền mặt</span>
-                        <span class="fw-bold text-body-secondary"><?=$order[0]['TongTien']?> ₫</span>
+                        <span class="fw-bold text-body-secondary"><?=number_format($order[0]['TongTien'],0,',','.')?> ₫</span>
                     </div>
                 </div>
             </section>
@@ -113,12 +112,12 @@
                 <div class="container">
                     <div class="d-flex justify-content-between mt-1">
                         <span class="text-black-50 fw-medium">Tạm tính</span>
-                        <span class="fw-bold text-body-secondary"><?=$totalPro?> ₫</span>
+                        <span class="fw-bold text-body-secondary"><?=number_format($totalPro,0,',','.')?> ₫</span>
                     </div>
 
                     <div class="d-flex justify-content-between mt-1">
                         <span class="text-black-50 fw-medium">Phí vận chuyển</span>
-                        <span class="fw-bold text-body-secondary"><?=$order[0]['PhiVanChuyen']?> ₫</span>
+                        <span class="fw-bold text-body-secondary"><?=number_format($order[0]['PhiVanChuyen']??0,0,',','.')?> ₫</span>
                     </div>
 
                     <div class="d-flex justify-content-between mt-1">
@@ -130,12 +129,12 @@
 
                     <div class="d-flex justify-content-between mt-1">
                         <span class="text-black-50 fw-medium">Thành tiền</span>
-                        <span class="fw-bold text-danger fs-4"><?=$order[0]['TongTien']?> ₫</span>
+                        <span class="fw-bold text-danger fs-4"><?=number_format($order[0]['TongTien'],0,',','.')?> ₫</span>
                     </div>
 
                     <div class="row">
-                        <div class="col-8"><button class="btn container-fluid btn-secondary">Đã nhận hàng </button></div>
-                        <div class="col-4"><button class="btn container-fluid btn-secondary">Hủy Đơn </button></div>
+                        <div class="col-8"><button class="btn container-fluid btn-warning <?=($order[0]['TrangThai']=='dang-giao-hang')?'':'disabled'?>">Đã nhận hàng </button></div>
+                        <div class="col-4"><a href="<?=APPURL?>user/deleteOrder?IdDh=<?=$order[0]['Id']?>" class="btn container-fluid btn-secondary <?=($order[0]['TrangThai']=='huy-don')?'disabled':''?>">Hủy Đơn </a></div>
                     </div>
 
                     <div>

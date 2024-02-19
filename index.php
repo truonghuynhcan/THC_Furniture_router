@@ -25,12 +25,15 @@ $router
     ->get('/user/signup', [UserController::class, 'signup'])
     ->get('/user/logout', [UserController::class, 'logout'])
     ->get('/user/order', [UserController::class, 'showOrder'])
+    ->get('/user/deleteOrder', [UserController::class, 'checkDeleteOrder'])
+    ->get('/user/deleteOrder2', [UserController::class, 'DeleteOrder'])
     ->get('/user/info', [UserController::class, 'showInfo'])
     
     // cart
     ->get('/cart', [CartController::class, 'showcart'])
     ->get('/cart/add', [CartController::class, 'addToCart'])
     ->get('/cart/cartItem', [CartController::class, 'cartItem'])
+    ->get('/cart/remoteProduct', [CartController::class, 'remoteProduct'])
     ->get('/cart/checkout', [CartController::class, 'showCheckout'])
     ->post('/cart/checkout', [CartController::class, 'checkout'])
 

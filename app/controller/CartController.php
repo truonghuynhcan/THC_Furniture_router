@@ -12,17 +12,17 @@ class CartController extends CoreController
             // lấy thông tin người dùng
             $SoLuongSP = $_POST['countPro'];
             $TongTien = $_POST['totalBill'];
+            $PhiVanChuyen = $_POST['shippingFee'];
             $NguoiNhan = $_POST['fullname'];
             $SDT = $_POST['sdt'];
             $DiaChiGiaoHang = $_POST['address'];
-            $MaTK = $_SESSION['user']['Id'];
 
             //lấy thông tin dơn hàng
             $MaDH = $_POST['madh'];
 
             // cập nhật giỏ hàng
             $order = new CartModel(); //load model
-            // $order->orderById($SoLuongSP, $TongTien, $NguoiNhan, $SDT, $DiaChiGiaoHang, $MaTK);
+            $order->orderById($SoLuongSP, $TongTien, $PhiVanChuyen, $NguoiNhan, $SDT, $DiaChiGiaoHang, $MaDH);
             showNoti('Bạn đã đặt hàng thành công', 'info');
             header('location: ' . APPURL . 'user/order?idDh=' . $MaDH);
             // header('location: ' . APPURL . 'user/order');
@@ -43,6 +43,18 @@ class CartController extends CoreController
         }
         $this->loadViewSite('cart_checkout', $data);
     }
+
+
+    // xóa sản phẩm trong giỏ hàng
+    public function remoteProduct(){
+        $IdSP = $_GET['id'];
+        $oder = new CartModel();
+        $oder->remoteProduct($IdSP, $_SESSION['user']['Id']);
+        header("Location:" . APPURL . 'cart');
+    }
+
+
+    // thêm, bớt sản phẩm
     public function cartItem()
     {
         $MaDH = $_GET['MaDH'];
@@ -56,6 +68,7 @@ class CartController extends CoreController
         }
         header('Location: ' . APPURL . 'cart');
     }
+
 
     public function addToCart()
     {
@@ -74,7 +87,8 @@ class CartController extends CoreController
                 $cart = $order->getCartbyUser($MaTK)[0];
             }
             #thêm sp vào giỏ
-            $order->addProduct($cart['Id'], $MaSP);
+            $sp = $order->getProductById($MaSP)[0];
+            $order->addProduct($cart['Id'], $sp);
         } else {
             //  chua dang nhap --> lưu vào session
             // // có giỏ hàng chưa
@@ -113,6 +127,7 @@ class CartController extends CoreController
 
     }
 
+
     public function showcart()
     {
         $idUser = $_SESSION['user']['Id'];
@@ -127,15 +142,4 @@ class CartController extends CoreController
         }
 
     }
-
-    // public function cartItem($MaDH, $MaSP, $type)
-    // {
-    //     $order = $this->loadModel('order');
-    //     if ($type == "increase") {
-    //         $order->increaseItem($MaDH, $MaSP);
-    //     } else {
-    //         $order->decreaseItem($MaDH, $MaSP);
-    //     }
-    //     header('Location: ' . APPURL . 'product/cart');
-    // }
 }
