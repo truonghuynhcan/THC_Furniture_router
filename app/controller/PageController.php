@@ -9,4 +9,8 @@ class PageController extends CoreController{
         $data['listItems'] = $products->getProducts();
         $this->loadViewSite('page_index',$data);
     }
+    public function about(){
+        
+        $this->loadViewSite('page_about');
+    }
 }

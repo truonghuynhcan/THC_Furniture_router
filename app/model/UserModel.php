@@ -6,6 +6,38 @@ use PHPMailer\PHPMailer\Exception;
 
 class UserModel
 {
+    public function ChangePass($idUser, $newPass){
+        $xl = new xl_data();
+        $sql = "UPDATE taikhoan SET `MatKhau`='".$newPass."' WHERE Id = ".$idUser;
+        $result = $xl->execute_item($sql);
+        return true;
+    }
+
+
+    public function getInfoOrder($idUser){
+        $xl = new xl_data();
+        $sql = 'SELECT * FROM donhang WHERE MaTK='.$idUser;
+        $result = $xl->readitem($sql);
+        return $result;
+    }
+
+
+    public function updateInfoUser($idUser, $ten, $sdt, $dc){
+        $xl = new xl_data();
+        $sql = "UPDATE taikhoan SET `HoVaTen`='".$ten."', `SDT`='".$sdt."', `DiaChi`='".$dc."' WHERE Id = ".$idUser;
+        $result = $xl->execute_item($sql);
+        return $result;
+    }
+
+
+    public function getInfoUser($idUser){
+        $xl = new xl_data();
+        $sql = 'SELECT * FROM taikhoan WHERE Id="'.$idUser.'"';
+        $result = $xl->readitem($sql);
+        return $result;
+    }
+
+
     public function deleteOrderById($idDH){
         $xl = new xl_data();
         $sql = "UPDATE donhang SET `TrangThai`='huy-don' WHERE Id = ".$idDH;
@@ -106,7 +138,7 @@ class UserModel
         $xl = new xl_data();
         $sql = 'INSERT INTO taikhoan (Id, HoVaTen, SDT, DiaChi, Email, MatKhau, Quyen) VALUES (null,"' . $fullname . '","' . $sdt . '","' . $address . '","' . $email . '","' . $hashedPassword . '",0)';
         $result = $xl->execute_item($sql);
-        return $result;
+        return true;
     }
 
     public function login($email, $pass)

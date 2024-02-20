@@ -138,7 +138,7 @@
                     </div>
 
                     <div>
-                        <a href="<?=APPURL?>" class="container-fluid btn btn-primary my-3 fs-5">Đóng</a>
+                        <a href="<?=APPURL?>user/info_order" class="container-fluid btn btn-primary my-3 fs-5">Đóng</a>
                     </div>
                 </div>
             </section>

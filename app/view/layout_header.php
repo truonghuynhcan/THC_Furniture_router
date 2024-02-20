@@ -36,7 +36,7 @@
                                 <a class="nav-link active" aria-current="page" href="<?= APPURL ?>">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">Giới thiệu</a>
+                                <a class="nav-link" href="<?=APPURL?>about">Giới thiệu</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -75,7 +75,7 @@
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li><a class="dropdown-item" href="<?= APPURL ?>ad_dashboard/index">Admin</a></li>
                                         <li><a class="dropdown-item" href="<?= APPURL ?>user/info">Tài khoản</a></li>
-                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/login">Quản lý đơn hàng</a>
+                                        <li><a class="dropdown-item" href="<?= APPURL ?>user/info_order">Quản lý đơn hàng</a>
                                         </li>
                                         <li class="border-top mt-2 py-1 opacity-75"><a class="dropdown-item"
                                                 href="<?= APPURL ?>user/logout">Đăng xuất</a></li>
