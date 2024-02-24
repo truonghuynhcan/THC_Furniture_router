@@ -118,6 +118,13 @@ class UserController extends CoreController
     }
 
 
+    public function order_received()
+    {
+        $idDH = $_GET["IdDh"];
+        $user = new UserModel(); //load model
+        $kq = $user->order_received($idDH); //lấy danh sách
+        header("Location:" . APPURL . "user/order?idDh=" . $idDH);
+    }
     public function DeleteOrder()
     {
         $idDH = $_GET["IdDh"];

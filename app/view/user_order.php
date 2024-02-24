@@ -133,8 +133,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-8"><button class="btn container-fluid btn-warning <?=($order[0]['TrangThai']=='dang-giao-hang')?'':'disabled'?>">Đã nhận hàng </button></div>
-                        <div class="col-4"><a href="<?=APPURL?>user/deleteOrder?IdDh=<?=$order[0]['Id']?>" class="btn container-fluid btn-secondary <?=($order[0]['TrangThai']=='huy-don')?'disabled':''?>">Hủy Đơn </a></div>
+                        <div class="col-8"><a href="<?=APPURL?>user/order_received?IdDh=<?=$order[0]['Id']?>" class="btn container-fluid btn-warning <?=($order[0]['TrangThai']=='dang-giao-hang')?'':'disabled btn-outline-warning'?>">Đã nhận hàng </a></div>
+                        <div class="col-4"><a href="<?=APPURL?>user/deleteOrder?IdDh=<?=$order[0]['Id']?>" class="btn container-fluid btn-secondary <?=($order[0]['TrangThai']=='huy-don')?'disabled btn-outline-secondary':''?>">Hủy Đơn </a></div>
                     </div>
 
                     <div>

@@ -5,7 +5,7 @@
             <h1>Quản lý sách</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="index.php?pg=ad&active=book_management" class="active">Quản lý sách</a>
+                    <a href="<?=APPURL?>ad_products/index" class="active">Quản lý sách</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
@@ -31,7 +31,7 @@
                 <!-- <i class='bx bx-search'></i> -->
                 <!-- <i class='bx bx-filter'></i> -->
             </div>
-            <form action="<?=APPURL?>ad_products/update/<?=$pro['Id']?>" method="post" class="row">
+            <form action="<?=APPURL?>ad_products/update?id=<?=$pro['Id']?>" method="post" class="row">
                 <div class="col-lg-8 d-flex flex-column gap-2">
                     <div class="mb-3">
                         <label for="tensp" class="form-label">Tên sản phẩm</label>

@@ -28,7 +28,6 @@ class CartModel
         $xl = new xl_data();
         $sql = "DELETE FROM chitietdonhang 
         WHERE MaDH IN (SELECT Id FROM donhang WHERE MaTK = " . $IdUser . ") AND MaSP = " . $IdSP;
-
         $result = $xl->execute_item($sql);
         return $result;
     }

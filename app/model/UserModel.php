@@ -38,6 +38,12 @@ class UserModel
     }
 
 
+    public function order_received($idDH){
+        $xl = new xl_data();
+        $sql = "UPDATE donhang SET `TrangThai`='giao-thanh-cong' WHERE Id = ".$idDH;
+        $result = $xl->execute_item($sql);
+        return $result;
+    }
     public function deleteOrderById($idDH){
         $xl = new xl_data();
         $sql = "UPDATE donhang SET `TrangThai`='huy-don' WHERE Id = ".$idDH;

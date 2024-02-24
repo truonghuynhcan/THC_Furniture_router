@@ -13,7 +13,9 @@ use App\controller\PageController;
 use App\controller\ProductController;
 use App\controller\UserController;
 use App\controller\CartController;
-use App\controller\ad_Controller;
+use App\controller\Ad_DashboardController;
+use App\controller\Ad_ProductController;
+use App\controller\Ad_OrderController;
 
 $router = new Router();
 $router
@@ -28,6 +30,7 @@ $router
     ->post('/user/signup', [UserController::class, 'signup'])
     ->get('/user/logout', [UserController::class, 'logout'])
     ->get('/user/order', [UserController::class, 'showOrder'])
+    ->get('/user/order_received', [UserController::class, 'order_received'])
     ->get('/user/deleteOrder', [UserController::class, 'checkDeleteOrder'])
     ->get('/user/deleteOrder2', [UserController::class, 'DeleteOrder'])
     ->get('/user/info', [UserController::class, 'showInfo'])
@@ -44,7 +47,18 @@ $router
     ->get('/cart/checkout', [CartController::class, 'showCheckout'])
     ->post('/cart/checkout', [CartController::class, 'checkout'])
     
-    ->get('/ad_dashboard/index', [ad_Controller::class, 'showDashboard'])
+    //  ADMIN ===========================================================================
+    ->get('/ad_dashboard/index', [Ad_DashboardController::class, 'showDashboard'])
+    
+    ->get('/ad_products/index', [Ad_ProductController::class, 'showProducts'])
+    ->get('/ad_products/update', [Ad_ProductController::class, 'update'])
+    ->post('/ad_products/update', [Ad_ProductController::class, 'update'])
+    ->get('/ad_products/change_status', [Ad_ProductController::class, 'change_status'])
+
+    ->get('/ad_order/index', [Ad_OrderController::class, 'showListOrder'])
+    ->get('/ad_order/detail', [Ad_OrderController::class, 'showOrder'])
+    ->get('/ad_order/CancelOrder', [Ad_OrderController::class, 'checkCancelOrder'])
+    ->get('/ad_order/CancelOrder2', [Ad_OrderController::class, 'CancelOrder'])
 ;
 
 // echo $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

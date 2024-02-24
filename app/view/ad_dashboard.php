@@ -67,13 +67,14 @@
 						<tbody>
 							<?php $i=1; foreach ($Orders as $Order):?>
 							<tr>
-								<td scope="row"><?=$i?></td>
+								<td scope="row"><a href="<?=APPURL?>ad_order/detail?idDh=<?= $Order['Id'] ?>">#<?= $Order['Id'] ?>
+                                </a></td>
 								<td class="text-center"><?=date("d-m-Y", strtotime ($Order['NgayDat']))?></td>
 								<td><?=$Order['Id']?></td>
 								<td><?=$Order['TaiKhoan']?></td>
 								<td><?=$Order['NguoiNhan']?></td>
-								<td><span class="status pending"><?=$Order['TrangThai']?></span></td>
-								<td class="text-end pe-3"><?=number_format($Order['TongTien'],0,',','.')?> ₫</td>
+								<td><span class="status <?=($Order['TrangThai']=='giao-thanh-cong'||$Order['TrangThai']=='huy-don')?'completed':(($Order['TrangThai']=='gio-hang')?'process':'pending')?>"><?=$Order['TrangThai']?></span></td>
+								<td class="text-end pe-3"><?=($Order['TrangThai']!='huy-don')?number_format($Order['TongTien'],0,',','.'):'-'?> ₫</td>
 							</tr>
 							<?php $i++; endforeach; ?>
 							<!-- <tr>
