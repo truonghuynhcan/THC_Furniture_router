@@ -1,0 +1,1 @@
+mở terminal -> chạy lệnh: php -S localhost:8080
