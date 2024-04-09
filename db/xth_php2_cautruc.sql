@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 18, 2024 at 02:53 PM
+-- Generation Time: Apr 09, 2024 at 03:11 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -65,15 +65,16 @@ CREATE TABLE `danhmuc` (
 
 CREATE TABLE `donhang` (
   `Id` int NOT NULL,
-  `NgayDat` datetime DEFAULT CURRENT_TIMESTAMP,
-  `SoLuongSP` int DEFAULT '0',
-  `TongTien` int DEFAULT '0',
-  `MaGG` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NgayDat` datetime NOT NULL,
+  `SoLuongSP` int NOT NULL DEFAULT '0',
+  `TongTien` int NOT NULL DEFAULT '0',
+  `IdGG` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `TrangThai` set('gio-hang','cho-xac-nhan','dang-chuan-bi','dang-giao-hang','giao-thanh-cong','huy-don') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'gio-hang',
   `MaTK` int NOT NULL,
-  `NguoiNhan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'người nhận hàng',
-  `SDT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'SDT người nhận',
-  `DiaChiGiaoHang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'địa chỉ nhận hàng'
+  `PhiVanChuyen` int DEFAULT NULL,
+  `NguoiNhan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `DiaChiGiaoHang` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `SDT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,7 +88,7 @@ CREATE TABLE `magiamgia` (
   `GiaGiam` int DEFAULT NULL,
   `TLGiam` int DEFAULT NULL,
   `GiamToiDa` int DEFAULT NULL,
-  `SoLuongGG` int NOT NULL DEFAULT '0',
+  `SoLuong` int NOT NULL DEFAULT '1',
   `NgayBatDau` datetime NOT NULL,
   `NgayKetThuc` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -103,7 +104,7 @@ CREATE TABLE `sanpham` (
   `IdDM` int NOT NULL,
   `TenSanPham` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `DonGia` int NOT NULL,
-  `GiamGia` int DEFAULT '0' COMMENT 'giá trị %',
+  `GiamGia` int DEFAULT NULL COMMENT 'giá trị %',
   `Anh` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `TonKho` int NOT NULL,
   `ThuongHieu` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -112,7 +113,7 @@ CREATE TABLE `sanpham` (
   `MauSac` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `MoTa` text COLLATE utf8mb4_general_ci,
   `MoTaCT` longtext COLLATE utf8mb4_general_ci,
-  `NgayNhap` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `NgayNhap` date NOT NULL,
   `TrangThai` int DEFAULT '1' COMMENT 'ẩn(0), hiện(1)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -162,7 +163,7 @@ ALTER TABLE `danhmuc`
 ALTER TABLE `donhang`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `fk_donhang_taikhoan` (`MaTK`),
-  ADD KEY `fk_donhang_magiamgia` (`MaGG`);
+  ADD KEY `fk_donhang_magiamgia` (`IdGG`);
 
 --
 -- Indexes for table `magiamgia`
@@ -238,8 +239,8 @@ ALTER TABLE `chitietdonhang`
 -- Constraints for table `donhang`
 --
 ALTER TABLE `donhang`
-  ADD CONSTRAINT `fk_donhang_magiamgia` FOREIGN KEY (`MaGG`) REFERENCES `magiamgia` (`MaGG`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_donhang_taikhoan` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_donhang_magiamgia` FOREIGN KEY (`IdGG`) REFERENCES `magiamgia` (`MaGG`),
+  ADD CONSTRAINT `fk_donhang_taikhoan` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`Id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sanpham`

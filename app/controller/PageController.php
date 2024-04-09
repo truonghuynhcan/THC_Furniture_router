@@ -10,7 +10,9 @@ class PageController extends CoreController{
         $this->loadViewSite('page_index',$data);
     }
     public function about(){
-        
         $this->loadViewSite('page_about');
+    }
+    public function agent(){
+        $this->loadViewSite('page_agent');
     }
 }

@@ -10,6 +10,7 @@ include_once(__DIR__ . '/app/Libraries/Helpers.php');
 require_once(__DIR__ . '/vendor/autoload.php');
 
 use App\controller\PageController;
+use App\controller\NewsController;
 use App\controller\ProductController;
 use App\controller\UserController;
 use App\controller\CartController;
@@ -21,6 +22,9 @@ $router = new Router();
 $router
     ->get('/', [PageController::class, 'index'])
     ->get('/about', [PageController::class, 'about'])
+    ->get('/agent', [PageController::class, 'agent'])
+    // news
+    ->get('/news', [NewsController::class, 'news'])
     // product
     ->get('/product/detail', [ProductController::class, 'detail'])
     // user

@@ -157,10 +157,11 @@
             </a>
             <div class="row mb-3">
                 <div class="col-6">
-                    <a href="<?=APPURL?>product/addToCart/<?=$pro['Id']?>" class="btn container-fluid btn-outline-primary text-decoration-none py-3">Thêm vào giỏ hàng</a>
+                    <a href="<?=APPURL?>cart/add?id=<?=$pro['Id']?>" class="btn container-fluid btn-outline-primary text-decoration-none py-3">Thêm vào giỏ hàng</a>
                 </div>
                 <div class="col-6">
-                    <a href="#" class="btn container-fluid btn-outline-primary text-decoration-none py-3">Thêm vào giỏ hàng</a>
+                
+                    <a href="<?= APPURL ?>cart/add?id=<?= $pro['Id'] ?>" class="btn container-fluid btn-outline-primary text-decoration-none py-3">Thêm vào giỏ hàng</a>
                 </div>
             </div>
             <table class="fs-6 mb-3">

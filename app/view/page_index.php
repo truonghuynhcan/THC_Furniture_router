@@ -108,7 +108,7 @@
                         </div>
                         <img src="<?= APPURL ?>public/upload/products/<?= $item['Anh'] ?>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href="/product/detail?id=<?= $item['Id'] ?>"
+                            <a href="<?= APPURL ?>product/detail?id=<?= $item['Id'] ?>"
                                 class="card-title h5 text-decoration-none overflow-auto" style="height: 3.5em;">
                                 <?= $item['TenSanPham'] ?>
                             </a>

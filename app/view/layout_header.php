@@ -50,13 +50,10 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Hệ thống</a>
+                                <a class="nav-link" href="<?=APPURL?>agent">Hệ thống</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tinh tức</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Liên hệ</a>
+                                <a class="nav-link" href="<?=APPURL?>news">Tin tức</a>
                             </li>
                         </ul>
                         <!-- Login / Sign up -->
