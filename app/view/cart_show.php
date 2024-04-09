@@ -40,7 +40,6 @@
                                         style="height: 60px;"></td>
                                 <td>
                                     <a class="text-body text-decoration-none" href="<?= APPURL ?>product/detail?id=<?= $sp['Id'] ?>"><?= $sp['TenSP'] ?></a>
-                                    
                                 </td>
                                 <td class="text-primary text-end">
                                     <?= number_format($sp['DonGia'], 0, ',', '.') ?> ₫
